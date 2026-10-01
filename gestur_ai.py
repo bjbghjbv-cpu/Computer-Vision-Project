@@ -9,7 +9,7 @@ import os
 from gtts import gTTS
 import pygame
 
-# 1. UNDUH MODEL OTOMATIS
+
 model_path = 'hand_landmarker.task'
 if not os.path.exists(model_path):
     print("Mengunduh model MediaPipe... Mohon tunggu.")
@@ -17,7 +17,7 @@ if not os.path.exists(model_path):
     urllib.request.urlretrieve(url, model_path)
     print("Berhasil mengunduh model.")
 
-# 2. SIAPKAN SUARA
+
 PHRASES = {
     "hi": "hi",
     "my": "my",
@@ -60,7 +60,7 @@ def speak(key):
         print(f"Error memutar suara: {e}")
         return False
 
-# 3. KONFIGURASI MEDIAPIPE
+
 base_options = python.BaseOptions(model_asset_path=model_path)
 options = vision.HandLandmarkerOptions(
     base_options=base_options,
@@ -71,7 +71,7 @@ options = vision.HandLandmarkerOptions(
 )
 detector = vision.HandLandmarker.create_from_options(options)
 
-# 4. LOGIKA PENGHITUNG JARI
+
 def dist(a, b):
     return math.hypot(a.x - b.x, a.y - b.y)
 
@@ -86,7 +86,7 @@ def get_fingers(lm):
         fingers.append(dist(lm[tip], lm[0]) > dist(lm[pip], lm[0]))
     return fingers
 
-# 5. PENGENALAN GESTUR (Perbaikan pada logika jarak/tinggi)
+
 def recognize(hand_info):
     text = ""
     num_hands = len(hand_info)
@@ -109,16 +109,15 @@ def recognize(hand_info):
         elif f[1] and f[2] and f[3] and f[4]:
             text = "thankyou"
         elif f[1] and f[2] and not f[3] and not f[4]:
-            # PERBAIKAN: Menggunakan perbandingan posisi relatif terhadap pergelangan tangan (lm[0])
-            # Makin kecil nilai Y di MediaPipe, berarti posisi objek makin ke atas layar
+           
             if lm[8].y > lm[0].y - 0.2: 
-                text = "is"  # Posisi tangan lebih rendah/sedang
+                text = "is" 
             else:
-                text = "nice to meet you"  # Posisi tangan diangkat tinggi ke atas
+                text = "nice to meet you"  
                 
     return text
 
-# 6. PROGRAM UTAMA KAMERA
+
 cap = cv2.VideoCapture(0)
 last_gesture_time = 0.0
 gesture_cooldown = 2.0
