@@ -1,0 +1,3 @@
+Library include
+pip install opencv-python mediapipe gtts pygame
+pip install opencv-python mediapipe gtts pygame
