@@ -12,7 +12,7 @@ OpenCV
 MediaPipe
 pip install opencv-python mediapipe gtts pygame
 pip install gTTS
-Kloning repositori ini:**
+Kloning repositori ini:
    bash
-   git clone https://github.com/repos
+   git clone https://github.com/bjbghjbv-cpu/Computer-Vision-Project.git
    cd computer-vision-project
