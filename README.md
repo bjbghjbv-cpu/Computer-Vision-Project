@@ -10,3 +10,9 @@ Persyaratan Sistem
 Pastikan Python sudah terinstal di sistem Anda. Pustaka utama yang digunakan dalam proyek ini meliputi:
 OpenCV
 MediaPipe
+pip install opencv-python mediapipe gtts pygame
+pip install gTTS
+Kloning repositori ini:**
+   bash
+   git clone https://github.com/repos
+   cd computer-vision-project
